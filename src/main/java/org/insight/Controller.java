@@ -61,27 +61,9 @@ public class Controller {
 
     };
 
-    public static final Handler product_action = context -> {
-        String manufacturer = context.formParamAsClass("manufacturer", String.class)
-                .check(Objects::nonNull, "Manufacturer is required")
-                .get();
-        String manufactureDateTime = context.formParamAsClass("manufactureDateTime", String.class)
-                .check(Objects::nonNull, "manufactureDateTime is required")
-                .get();
-        String expiryDate = context.formParamAsClass("expiryDate", String.class)
-                .check(Objects::nonNull, "Manufacturer is required")
-                .get();
-        String productDescription = context.formParamAsClass("productDescription", String.class)
-                .check(Objects::nonNull, "manufactureDateTime is required")
-                .get();
-        String locationManufactured = context.formParamAsClass("locationManufactured", String.class)
-                .check(Objects::nonNull, "Manufacturer is required")
-                .get();
-        String batchNumber = context.formParamAsClass("batchNumber", String.class)
-                .check(Objects::nonNull, "manufactureDateTime is required")
-                .get();
-
-
+    public static final Handler get_clients_by_company = context -> {
+        String company = context.pathParam("company");
+        context.json(Business.getClientByCompanyName(company));
 
     };
 
