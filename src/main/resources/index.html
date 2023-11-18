@@ -66,57 +66,81 @@
         input[type="submit"]:hover {
             background-color: #005555; /* Slightly darker cyan on hover */
         }
+        .director-info {
+            margin-bottom: 10px;
+        }
     </style>
 
 </head>
 <body>
 
-<h2>Add Client</h2>
+    <h2>Add Client</h2>
 
-<form action="/addclient" method="post">
-    <label for="companyName">Company Name:</label>
-    <input type="text" id="companyName" name="companyName" required><br>
-
-    <label for="numberDirectors">Number of Directors:</label>
-    <input type="number" id="numberDirectors" name="numberDirectors" required><br>
-
-    <!-- Directors Information -->
-    <div id="directorsContainer"></div>
-
-    <!-- Add Director Button -->
-    <button type="button" onclick="addDirector()">Add Director</button><br>
-
-    <input type="submit" value="Submit">
-</form>
-
-<script>
-    function addDirector() {
-        const container = document.getElementById('directorsContainer');
-        const numberOfDirectors = document.getElementById('numberDirectors').value;
-
-        for (let i = 1; i <= numberOfDirectors; i++) {
-            const directorName = document.createElement('input');
-            directorName.type = 'text';
-            directorName.name = `directorName${i}`;
-            directorName.placeholder = `Director ${i} Name`;
-            container.appendChild(directorName);
-
-            const directorSurname = document.createElement('input');
-            directorSurname.type = 'text';
-            directorSurname.name = `directorSurname${i}`;
-            directorSurname.placeholder = `Director ${i} Surname`;
-            container.appendChild(directorSurname);
-
-            const directorEmail = document.createElement('input');
-            directorEmail.type = 'email';
-            directorEmail.name = `directorEmail${i}`;
-            directorEmail.placeholder = `Director ${i} Email`;
-            container.appendChild(directorEmail);
-
-            container.appendChild(document.createElement('br'));
+    <form action="/addclient" method="post" onsubmit="return validateForm()">
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" name="companyName" required><br>
+    
+        <label for="numberDirectors">Number of Directors:</label>
+        <input type="number" id="numberDirectors" name="numberDirectors" min="1" required><br>
+    
+        <!-- Directors Information -->
+        <div id="directorsContainer"></div>
+    
+        <!-- Add Director Button -->
+        <button type="button" onclick="addDirector()">Add Director</button><br>
+    
+        <input type="submit" value="Submit">
+    </form>
+    
+    <script>
+        function addDirector() {
+            const container = document.getElementById('directorsContainer');
+            const numberOfDirectors = document.getElementById('numberDirectors').value;
+    
+            for (let i = 1; i <= numberOfDirectors; i++) {
+                const directorDiv = document.createElement('div');
+                directorDiv.classList.add('director-info');
+    
+                const directorName = document.createElement('input');
+                directorName.type = 'text';
+                directorName.name = `directorName${i}`;
+                directorName.placeholder = `Director ${i} Name`;
+                directorDiv.appendChild(directorName);
+    
+                const directorSurname = document.createElement('input');
+                directorSurname.type = 'text';
+                directorSurname.name = `directorSurname${i}`;
+                directorSurname.placeholder = `Director ${i} Surname`;
+                directorDiv.appendChild(directorSurname);
+    
+                const directorEmail = document.createElement('input');
+                directorEmail.type = 'email';
+                directorEmail.name = `directorEmail${i}`;
+                directorEmail.placeholder = `Director ${i} Email`;
+                directorDiv.appendChild(directorEmail);
+    
+                container.appendChild(directorDiv);
+            }
         }
-    }
-</script>
-
-</body>
-</html>
+    
+        function validateForm() {
+            const numberOfDirectors = parseInt(document.getElementById('numberDirectors').value);
+            const directorsInfo = document.querySelectorAll('.director-info input');
+    
+            if (isNaN(numberOfDirectors) || numberOfDirectors < 1) {
+                alert('Please enter a valid number of directors.');
+                return false;
+            }
+    
+            for (let i = 0; i < directorsInfo.length; i++) {
+                if (!directorsInfo[i].value.trim()) {
+                    alert('Please fill in all director information.');
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+    
+    </body>
+    </html>
