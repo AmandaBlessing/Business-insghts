@@ -11,7 +11,12 @@ body{
     padding: 2px 4px;
     font-family: Poppins;
 }
-
+.nav{
+    display: flex;
+    justify-content: space-around;
+    background-color: #dddddd;
+    padding: 13px 0;
+}
 
 .main{
     display:grid;
@@ -39,10 +44,15 @@ main {
     width: 320px;
     margin: 0 auto;
 } 
+.box5{
+    width: 80%;
+    margin: auto;
+}
 
 table {
+    margin:2px auto;
     border-collapse: collapse;
-    width: 80%;
+    /* width: 80%; */
   }
 
   th, td {
