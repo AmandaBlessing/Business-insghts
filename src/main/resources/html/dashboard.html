@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+  <nav class="nav">
+    <h1>Dashbord</h1>
+  </nav>
+  <div class="main">
+
+    <div class="sidebar">
+    <h2>companies</h2>
+    
+    <ul>
+      <li>
+        <a href="">Shoperite</a>
+      </li>
+      <li><a href="">pep</a></li>
+      <li><a href="">
+        Lesedi-La-Bonana
+      </a></li>
+    </ul>
+  </div>
+
+    <main>
+      <h1 style="grid-column: 1/ span 2; text-align: center;">Lesedi-La-Bonana organization</h1>
+      <div class="box1" >
+        <h1>Purpose</h1>
+        <button class="pie">Pie Chart</button>
+        <button class="bar">Bar Chart</button>
+        <button class="line">Line chart</button>
+        <canvas id="purpose"></canvas>    
+      </div>
+      
+      <div class="box2">
+        <h1>Performance</h1>
+        <button class="pie">Pie Chart</button>
+        <button class="bar">Bar Chart</button>
+        <button class="line">Line chart</button>
+        <canvas id="performence"></canvas>
+        
+      </div>
+      <div class="box3">
+        <h1>Comformance</h1>
+        <button class="pie">Pie Chart</button>
+        <button class="bar">Bar Chart</button>
+        <button class="line">Line chart</button>
+        <canvas id="conformance"></canvas>
+        
+      </div>
+      <div class="box4">
+        <h1>Substainablility</h1>
+        <button class="pie">Pie Chart</button>
+        <button class="bar">Bar Chart</button>
+        <button class="line">Line chart</button>
+        <canvas id="sustainability"></canvas>
+      </div> 
+      <div class="box5" style="grid-column: 1/span 2; background-color: rgba(227, 219, 219, 0.749);" >
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+            <th>score</th>
+            <th>Agreement</th>
+            <th>Mixed Opinions</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>purpose</td>
+            </tr>
+            <tr>
+              <td>performence</td>
+            </tr>
+            <tr>
+              <td>comformance</td>
+            </tr>
+            <tr>
+              <td>Substainablility</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h2>Recomondation</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi in harum facere labore odit! Perspiciatis incidunt dolore sunt, minus expedita iste, nostrum laboriosam maxime iusto esse natus libero, nihil quas?</p>
+      </div>
+    </main>
+    
+    
+  </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+      
+      <script src="../js/dashboard.js"></script>
+      
+</body>
+</html
