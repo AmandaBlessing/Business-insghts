@@ -10,6 +10,7 @@ public class Director {
     private final String email;
     private  boolean isTestDone = false;
     private Results results;
+    private boolean sentAssessment = false;
 
     private Map<String, List<Integer>> resultsMap = new HashMap<>();
 
@@ -38,6 +39,14 @@ public class Director {
 
     public Results getResults() {
         return results;
+    }
+
+    public boolean isSentAssessment() {
+        return sentAssessment;
+    }
+
+    public void setSentAssessment(boolean sentAssessment) {
+        this.sentAssessment = sentAssessment;
     }
 
     public void addToMap(String key, List<Integer> results){

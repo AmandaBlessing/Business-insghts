@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pie Chart</title>
+
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Add your CSS styles here if needed -->
+    <style>
+        canvas {
+            max-width: 400px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Dynamic Pie Chart</h2>
+
+<!-- Input fields for each pie slice -->
+<label for="slice1">Slice 1:</label>
+<input type="number" id="slice1" value="30" oninput="updateChart()">
+
+<label for="slice2">Slice 2:</label>
+<input type="number" id="slice2" value="20" oninput="updateChart()">
+
+<label for="slice3">Slice 3:</label>
+<input type="number" id="slice3" value="15" oninput="updateChart()">
+
+<label for="slice4">Slice 4:</label>
+<input type="number" id="slice4" value="35" oninput="updateChart()">
+
+<!-- Pie chart canvas -->
+<canvas id="pieChart"></canvas>
+
+<script>
+    // Initial data for the chart
+    const initialData = [30, 20, 15, 35];
+
+    // Function to update the pie chart based on input values
+    function updateChart() {
+        const slice1Value = parseInt(document.getElementById('slice1').value);
+        const slice2Value = parseInt(document.getElementById('slice2').value);
+        const slice3Value = parseInt(document.getElementById('slice3').value);
+        const slice4Value = parseInt(document.getElementById('slice4').value);
+
+        // Get the chart element
+        const ctx = document.getElementById('pieChart').getContext('2d');
+
+        // Update the data and redraw the chart
+        const updatedData = [slice1Value, slice2Value, slice3Value, slice4Value];
+        updateChartData(ctx, updatedData);
+    }
+
+    // Function to update the chart data and redraw the chart
+    function updateChartData(ctx, data) {
+        if (window.myPie) {
+            window.myPie.data.datasets[0].data = data;
+            window.myPie.update();
+        } else {
+            initializeChart(ctx, data);
+        }
+    }
+
+    // Function to initialize the pie chart
+    function initializeChart(ctx, data) {
+        window.myPie = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: data,
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50']
+                }],
+                labels: ['Slice 1', 'Slice 2', 'Slice 3', 'Slice 4']
+            },
+            options: {
+                responsive: true
+            }
+        });
+    }
+
+    // Initialize the chart on page load
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('pieChart').getContext('2d');
+        initializeChart(ctx, initialData);
+    });
+</script>
+
+</body>
+</html>
