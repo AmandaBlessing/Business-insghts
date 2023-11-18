@@ -7,7 +7,7 @@ import java.net.http.HttpResponse;
 
 public class AiAnalyst {
 
-    String apiKey = "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";
+    String apiKey = "";
 
     // Set the API endpoint
     String endpoint = "https://api.openai.com/v1/chat/completions";

@@ -79,3 +79,43 @@ main {
         margin: 0;
     }
 }
+
+#directorsList {
+    background-color: #fff; /* White */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+#directorsList h2 {
+    color: #008080; /* Dark cyan heading color */
+}
+
+#directorsList li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+#directorsList span {
+    margin-right: 10px;
+}
+
+#directorsList input {
+    background-color: #008080; /* Dark cyan button color */
+    color: #fff; /* White button text color */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#directorsList input:hover {
+    background-color: #005555; /* Slightly darker cyan on hover */
+}
+
+#directorsList input[disabled] {
+    background-color: #ddd; /* Grey for disabled button */
+    cursor: not-allowed;
+}

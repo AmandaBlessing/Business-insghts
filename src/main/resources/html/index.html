@@ -38,24 +38,46 @@
     <ul>
         <!-- Iterate over clients and make each client a clickable link -->
         <li th:each="client : ${clients}">
-            <a th:href="'/client/directors/' + ${client.getCompanyName}" th:text="${client.getCompanyName}"></a>
+            <a href="#" th:data-name="${client.getCompanyName}" th:onclick="showDirectors(this.getAttribute('data-name'))" th:text="${client.getCompanyName}"></a>
         </li>
     </ul>
 </aside>
 
 <!-- Directors List -->
-<div>
+<div id="directorsList" style="display: none;">
     <h2>Directors List</h2>
     <ul>
-        <!-- Iterate over directors and display their names and completion status -->
-        <li th:each="director : ${directors}">
-            <span th:text="${director.name}"></span>
-            <span th:text="${director.isTestDone ? 'Complete' : 'Incomplete'}"></span>
-            <!-- Show the "Send Question" button for incomplete tests -->
-            <button th:if="${!director.isTestDone}" type="submit" formaction="/email.action" formmethod="post" th:id="${director.email}">Send Question</button>
-        </li>
+        <!-- Directors will be displayed here using JavaScript -->
     </ul>
 </div>
+
+<!-- JavaScript to toggle visibility and display directors -->
+<script th:inline="javascript">
+    function showDirectors(directorsList) {
+    // Build HTML for directors
+    console.log(directorsList);
+    fetch("http://localhost:7000/client/directors/" + directorsList)
+        .then(data => data.json())
+        .then(x => {
+            var directorsHtml = "<form method='post' action='/email.action'>";
+
+            for (let i = 0; i < x.length; i++) {
+                console.log(x);
+                console.log(x[i].name);
+                directorsHtml += '<li>';
+                directorsHtml += `<span>${x[i].name}&nbsp;</span>`;
+                directorsHtml += `<span>${x[i].isTestDone ? 'Complete' : 'Incomplete'}&nbsp;</span>`;
+                directorsHtml += `<input type="hidden" name="email" value="${x[i].email}">`;
+                directorsHtml += `<input value="SEND QUESTION" ${!x[i].isTestDone ? 'type="submit"' : 'type="button" disabled="disabled"'}>`;
+                directorsHtml += '</li>';
+            }
+            directorsHtml += `</form>`;
+            document.getElementById('directorsList').innerHTML = directorsHtml;
+            document.getElementById('directorsList').style.display = 'block';
+        });
+}
+
+</script>
 
 </body>
 </html>

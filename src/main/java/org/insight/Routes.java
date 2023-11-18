@@ -18,6 +18,8 @@ public class Routes {
     public static final String QUESTIONS = "/questions";
     public static final String DIRECTORS_BY_COMPANY = "/client/directors/{companyName}";
 
+    public static final String DASHBOARD = "/dashboard";
+
 
 
 
@@ -34,6 +36,7 @@ public class Routes {
             post(SEND_EMAIL, Controller.send_email);
             get(QUESTIONS, Controller.questions);
             get(DIRECTORS_BY_COMPANY, Controller.directors_by_company);
+            get(DASHBOARD, Controller.dashboard);
 
         });
     }

@@ -70,9 +70,10 @@ public class Controller {
     public  static  final Handler test_action= ctx -> {
         String[] topic = {"purpose", "sustainability", "performance", "conformance"};
         Results result = new Results();
-        String email = ctx.formParam("email");
-        String company = ctx.formParam("companyName");
-        Director director = Business.getClientByCompanyName(company).getDirectorByEmail(email);
+//        String email = ctx.formParam("email");
+//        String company = ctx.pathParam("company");
+//        Director director = Business.getClientByCompanyName(company).getDirectorByEmail(email);
+        AiAnalyst ai = new AiAnalyst();
         int j = 1;
         for(int i = 0; i < 4; i++){
             List<Integer> results = new ArrayList<>();
@@ -83,15 +84,37 @@ public class Controller {
                     j++;
                 }
                 catch (Exception e){
-                    director.addToMap(topic[i], results );
+//                    director.addToMap(topic[i], results );
                     break;
                 }
             }
         }
+        String response = ai.sendRequest("You are a business analyst tasked with analyzing results of the following questions There is an up-to-date board charter in place approprate to the life-stage of the organisation and its current structure.\n" +
+                "There is an up-to-date delegation of authority policy in place, which is effectively monitored." +
+                "The managing director's report effectively communicates status, identifies issues, and clearly indicates a linkage to the business plan." +
+                "Board packs are structured and used effectively to guide the board to make decisions and hold those authorised to make decisions accountable." +
+                "The board calendar is up-to-date and relevant for the timing requirements of the enterprise and its strategic focus.\n" +
+                "All board meeting dates (and committee dates if applicable) for the year are scheduled in directors' diaries and align with the board calendar." +
+                "The organisation has an up-to-date strategy (identifying the companies purpose and medium-term vision) and a business plan (identifying the necessary next steps) that guides its focus and direction.\n" +
+                "The board ensures a strategic focus in every board meeting to ensure that board papers relevant to the theme agreed upon for that meeting are prepared and that necessary key strategic issues are addressed proactively.\n" +
+                "There is clarity regarding the organisation's culture, values, and beliefs." +
+                "The culture and values of the organisation are demonstrated by the board, setting the appropriate tone for the rest of the organisation to follow." +
+                "The board's conduct is characterised by trust, respect, candour, professionalism, accountability, diligence and commitment." +
+                "The organisation has developed a culture of accountability for performance." +
+                "Where the board has committee structures in place (complete as appopriate)" +
+                "The board committees (where appropriate) have approved terms of reference." +
+                "The board committees (where appropriate) have an agreed work plan for the year and are making good progress against that plan. these answers will be a number between 0 and 4, 4 being Full in place and 0 being not at all", "please provide Strong areas and areas of improvement based on this results list [0,4,2,2,2,3,1,4,4,3,2,1,0,2] an provide a summary of how the company is doing in terms of purpose");
+        System.out.println(response);
+        ctx.json(response);
     };
+
     public  static  final Handler get_clients= ctx -> {
         ObjectMapper ob = new ObjectMapper();
         ctx.json(ob.writeValueAsString(Business.getClientList()));
+
+    };
+    public  static  final Handler dashboard= ctx -> {
+        ctx.render("dashboard.html");
 
     };
 
@@ -102,11 +125,11 @@ public class Controller {
     };
 
     public static final Handler send_email = context ->{
-        String sampleEmail = "mrkphughes@gmail.com";
-//        String hash = context.pathParam("hashcode");
+
+        String email = context.formParam("email");
         String ipAddress = getLocalIPv4Address(); // Replace with your method to get the public IP
-        String url = "http://" + ipAddress + ":7000/questions";
-        sendEmail(sampleEmail, "Business Insights Questions","Please find link to questions, please complete all questions "+ url);
+        String url = "http://" + ipAddress + ":7000/questions"+"?emailId="+email;
+        sendEmail(email, "Business Insights Questions","Please find link to questions, please complete all questions "+ url);
 
     };
     public static final Handler questions = context ->{
@@ -115,12 +138,8 @@ public class Controller {
     };
 
     public static final Handler directors_by_company = context ->{
-        Client  client = Business.getClientByCompanyName(context.pathParam("companyName"));
-        HashMap<String, List<Director>> directors = new HashMap<>();
-        directors.put("directors", client.getDirectorList());
-        context.header("Access-Control-Allow-Origin","*");
+        Client client= Business.getClientByCompanyName(context.pathParam("companyName"));
         context.json(client.getDirectorList());
-//        context.render("/index.html", directors);
     };
 
 
