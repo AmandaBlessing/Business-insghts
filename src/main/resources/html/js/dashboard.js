@@ -8,6 +8,14 @@ const bar = document.querySelectorAll(".bar");
 const line = document.querySelectorAll(".line");
 
 
+const printDoc = document.querySelector("#print")
+
+
+printDoc.addEventListener('click',()=>{
+  window.print()
+})
+
+
 
 
 
