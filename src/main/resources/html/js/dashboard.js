@@ -148,3 +148,43 @@ BarChart(purpose);
 BarChart(performence);
 BarChart(conformance);
 BarChart(sustainability);
+
+const tdpurpose = document.querySelector("tdpurpose")
+const  tdperformence= document.querySelector("tdperformence")
+const tdcomformance = document.querySelector("tdcomformance")
+const tdsubstainablility= document.querySelector("tdsubstainablility")
+CreateColumn()
+const stages = ["Highest","Moderate","Lowest"]
+function CreateColumn(){
+  let randomIdx = Math.floor(Math.random()*3)
+  for(let i=0 ; i<12 ; i++){
+  const td = document.createElement('td')
+  if(randomIdx== 0){
+    td.style = "#df1f1f"
+
+  }
+  else if (randomIdx==1){
+    td.style = "rgb(255,165,0)"
+    
+  }
+  else{
+    td.style = "#53d053"
+  }
+  
+  td.innerHTML = stages[randomIdx]
+
+  if(i < 3){
+    tdpurpose.appendChild(td)
+  }else if(i>3 && i<6){
+    tdperformence.appendChild(td)
+  }else if (i>6 && i< 9){
+    tdcomformance.appendChild(td)
+  }else{
+    tdsubstainablility.appendChild(td)
+  }
+
+  }
+}
+
+
+

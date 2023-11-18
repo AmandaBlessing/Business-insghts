@@ -45,7 +45,7 @@ main {
     margin: 0 auto;
 } 
 .box5{
-    width: 80%;
+    width: 100%;
     margin: auto;
 }
 
@@ -56,7 +56,7 @@ table {
   }
 
   th, td {
-    border: 1px solid #dddddd;
+    border: 1px solid black;
     text-align: left;
     padding: 8px;
   }
